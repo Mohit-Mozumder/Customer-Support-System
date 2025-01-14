@@ -39,27 +39,27 @@ class TicketController extends Controller
     
         // Create a new ticket for the authenticated customer
         $ticket = Auth::user()->tickets()->create($request->only('subject', 'message'));
-    
+     
         // Find the admin email (assuming there's a single admin)
         $admin = User::where('role', 'admin')->first();  // Change this to get all admins if necessary
-    
+     
         // Send the email to the admin using Mailpit
         if ($admin) {
             Mail::to($admin->email)->send(new TicketCreatedMail($ticket));
         }
-    
+     
         return redirect()->route('tickets.index')->with('success', 'Ticket created successfully! The admin has been notified.');
     }
-
+ 
     public function close(Ticket $ticket)
     {
         // Update the ticket status to 'closed'
         $ticket->update(['status' => 'closed']);
-    
+     
         // Send a closure email to the customer
         Mail::to($ticket->user->email)->send(new TicketClosedMail($ticket));
     
         return redirect()->route('admin.index')->with('success', 'Ticket closed and customer notified!');
     }
     
-}
+} 

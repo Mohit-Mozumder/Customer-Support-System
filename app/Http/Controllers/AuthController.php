@@ -17,7 +17,7 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
-        
+         
         if (Auth::attempt($credentials)) {
             // Check if admin or customer
             if (Auth::user()->role == 'admin') {
@@ -33,7 +33,7 @@ class AuthController extends Controller
     // Logout
     public function logout()
     {
-        Auth::logout();
-        return redirect()->route('login');
+        Auth::logout(); 
+        return redirect()->route('login'); 
     }
 }

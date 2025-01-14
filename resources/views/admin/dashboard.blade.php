@@ -10,4 +10,4 @@
         <a href="{{ route('admin.index') }}" class="btn btn-primary">View Tickets</a>
         <a href="#" class="btn btn-secondary">Manage Users</a>
     </div>
-@endsection
+@endsection 
